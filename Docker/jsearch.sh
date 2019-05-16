@@ -11,7 +11,9 @@
   #   tmp/*.osm - osm files for jrenderer processing
   #
 
-  cd workspace
+  set -x
+
+  cd /workspace
 
   # create diff
   # note: this seems to be a kind of optimization if the process is not running
@@ -32,5 +34,3 @@
 
   # produce the backup for CONSECUTIVE processing
   mv next.osm world.osm
-
-done

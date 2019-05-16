@@ -1,5 +1,6 @@
 renderer
 archiv
+volumes/osm/*
 *.osm
 *.log
 *.png
