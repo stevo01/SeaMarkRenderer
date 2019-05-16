@@ -3,28 +3,6 @@
 status: this project is under development and not usable at the moment
         (just for test purposes)
 
-# Files and folders
-- volumes/log/log.txt <br>
-  log files from renderer
-
-- volume/tiles/* <br>
-  generated tiles
-
-- volume/osm/xapi.osm <br>
-  latest seamarks extract from overpass api
-
-- volume/osm/xapi.osm <br>
-  latest seamarks extract from overpass api
-
-- volume/osm/world.osm <br>
-  backup from latest processed seamarks extract from overpass api
-
-- Docker/dockerfile <br>
-  includes dockerfile for creation of docker image
-
-- docker-service.sh <br>
-  shell script to build/start/stop docker image/container
-
 # build docker container
 docker-service.sh build
 
@@ -59,6 +37,29 @@ docker-service jsearch
 ```
 docker-service jrender
 ```
+# Files and folders
+- volumes/log/log.txt <br>
+  log files from renderer
+
+- volume/tiles/* <br>
+  generated tiles
+
+- volume/osm/xapi.osm <br>
+  latest seamarks extract from overpass api
+
+- volume/osm/xapi.osm <br>
+  latest seamarks extract from overpass api
+
+- volume/osm/world.osm <br>
+  backup from latest processed seamarks extract from overpass api
+
+- Docker/dockerfile <br>
+  includes dockerfile for creation of docker image
+
+- docker-service.sh <br>
+  shell script to build/start/stop docker image/container
+
+![img](https://github.com/stevo01/SeaMarkRenderer/blob/master/workflow.png)
 
 # ToDo
 + use sources from https://svn.openstreetmap.org/applications/editors/josm/plugins/
