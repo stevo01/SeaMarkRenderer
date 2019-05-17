@@ -20,17 +20,10 @@
   #       the first time
   diff world.osm next.osm | grep id= | grep -v "<tag" > diffs
 
-  if [ -s diffs ]; then
-    echo "$(date) New rendering queued" >> log.txt
-
-    # call the application
-    java -jar jsearch.jar ./
-
-    echo "$(date) rendering ready" >> log.txt
-
-  else
-    echo "$(date) No changes, skip rendering" >> log.txt
-  fi
+  # call the application
+  echo "$(date) start jsearch.jar" >> log.txt
+  java -jar jsearch.jar ./
+  echo "$(date) jsearch.jar ready" >> log.txt
 
   # produce the backup for CONSECUTIVE processing
   mv next.osm world.osm

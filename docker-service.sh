@@ -8,7 +8,6 @@ IMAGE_NAME="seamark_renderer"
 
 VOLUMES_OPTS_RUN=" -v $(pwd)/volumes/tmp:/workspace/tmp \
                    -v $(pwd)/volumes/tiles:/workspace/tiles \
-                   -v $(pwd)/volumes/log:/workspace/log \
                    -v $(pwd)/volumes/osm:/workspace/osm \
                    -v $(pwd)/volumes/query:/workspace/query"
 

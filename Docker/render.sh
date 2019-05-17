@@ -21,5 +21,3 @@ for file in $(ls tmp | grep "\.osm"); do
 done
 
 echo "$(date) rendering process is done" >> log.txt
-
-rm tmp/*.send
