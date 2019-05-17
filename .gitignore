@@ -4,3 +4,7 @@ volumes/osm/*
 *.osm
 *.log
 *.png
+*.send
+SampleData
+*.pptx
+log.txt

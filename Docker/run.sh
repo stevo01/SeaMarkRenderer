@@ -4,8 +4,7 @@ if [ "$#" -ne 1 ]; then
     echo "usage: <run|build>"
     echo "commands:"
     echo "    run:     just start container (for debugging purposes)"
-    echo "    jsearch: start jsearch application"
-    echo "    render:  start render application"
+    echo "    update : start update procedure"
     echo ""
     exit 1
 fi
@@ -20,15 +19,10 @@ if [ "$1" = "run" ]; then
 
 fi
 
-if [ "$1" = "jsearch" ]; then
+if [ "$1" = "update" ]; then
   cd workspace
-  jserach.sh
-fi
-
-
-if [ "$1" = "render" ]; then
-  cd workspace
-  render.sh
+  update.sh
+  chmod a+w -R *
 fi
 
 exit 1

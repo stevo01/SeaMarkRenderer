@@ -1,31 +1,8 @@
-FROM alpine:3.9
+FROM openjdk:8u212-jdk-stretch
 
-
-# Default to UTF-8 file.encoding
-ENV LANG C.UTF-8
-
-# add a simple script that can auto-detect the appropriate JAVA_HOME value
-# based on whether the JDK or only the JRE is installed
-RUN { \
-		echo '#!/bin/sh'; \
-		echo 'set -e'; \
-		echo; \
-		echo 'dirname "$(dirname "$(readlink -f "$(which javac || which java)")")"'; \
-	} > /usr/local/bin/docker-java-home \
-	&& chmod +x /usr/local/bin/docker-java-home
-ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk
-ENV PATH $PATH:/usr/lib/jvm/java-1.8-openjdk/jre/bin:/usr/lib/jvm/java-1.8-openjdk/bin
-
-ENV JAVA_VERSION 8u212
-ENV JAVA_ALPINE_VERSION 8.212.04-r0
-
-RUN set -x \
-	&& apk add --no-cache \
-		openjdk8="$JAVA_ALPINE_VERSION" \
-	&& [ "$JAVA_HOME" = "$(docker-java-home)" ]
-
-RUN apk update && apk upgrade && \
-    apk add git bash apache-ant wget subversion diffutils
+RUN apt-get update && apt-get upgrade -y \
+    && apt-get install -y \
+    git bash ant wget subversion diffutils
 
 # fetch and build renderer
 RUN mkdir /workspace \
@@ -34,12 +11,6 @@ RUN mkdir /workspace \
     && cd renderer \
     && cd jsearch \
     && ant
-
-# fetch and build jrender
-# RUN cd workspace \
-#    && git clone https://github.com/openstreetmap/josm-plugins.git \
-#    && cd josm-plugins/seachart/jrender \
-#    && ant
 
 RUN cd /workspace \
 		&& svn co https://svn.openstreetmap.org/applications/editors/josm/plugins/seachart \
@@ -56,11 +27,11 @@ COPY run.sh /usr/local/bin
 RUN chmod +x /usr/local/bin/run.sh
 
 # deploy render script
-COPY render.sh /usr/local/bin
+COPY jrender.sh /usr/local/bin
 COPY jsearch.sh /usr/local/bin
+COPY update.sh  /usr/local/bin
 
-RUN chmod +x /usr/local/bin/render.sh
-RUN chmod +x /usr/local/bin/jsearch.sh
+RUN chmod +x /usr/local/bin/*.sh
 
 ENTRYPOINT ["/usr/local/bin/run.sh"]
 

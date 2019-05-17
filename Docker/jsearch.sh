@@ -21,9 +21,6 @@
   diff world.osm next.osm | grep id= | grep -v "<tag" > diffs
 
   # call the application
-  echo "$(date) start jsearch.jar" >> log.txt
+  echo "$(date) jsearch.jar: start " >> logging/log.txt
   java -jar jsearch.jar ./
-  echo "$(date) jsearch.jar ready" >> log.txt
-
-  # produce the backup for CONSECUTIVE processing
-  mv next.osm world.osm
+  echo "$(date) jsearch.jar: process is done" >> logging/log.txt
