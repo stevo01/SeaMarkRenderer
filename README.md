@@ -62,9 +62,7 @@ docker-service jrender
 ![img](https://github.com/stevo01/SeaMarkRenderer/blob/master/workflow.png)
 
 # ToDo
-+ use sources from https://svn.openstreetmap.org/applications/editors/josm/plugins/
-instead https://svn.openstreetmap.org/applications/editors/josm/plugins/
-+ make jsearch and jrender scripts runnable
++ implementation of "auto workflow"
 
 # bookmarks
 + http://overpass-api.de/command_line.html

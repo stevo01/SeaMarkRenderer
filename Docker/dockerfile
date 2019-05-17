@@ -28,23 +28,28 @@ RUN apk update && apk upgrade && \
     apk add git bash apache-ant wget subversion diffutils
 
 # fetch and build renderer
-RUN mkdir /workspace; \
-    cd workspace; \
-    git clone https://github.com/OpenNauticalChart/renderer.git; \
-    cd renderer; \
-    cd jsearch; \
-    ant
+RUN mkdir /workspace \
+    && cd workspace \
+    && git clone https://github.com/OpenNauticalChart/renderer.git \
+    && cd renderer \
+    && cd jsearch \
+    && ant
 
 # fetch and build jrender
-RUN cd workspace; \
-    git clone https://github.com/openstreetmap/josm-plugins.git; \
-    cd josm-plugins/seachart/jrender; \
-    ant
+# RUN cd workspace \
+#    && git clone https://github.com/openstreetmap/josm-plugins.git \
+#    && cd josm-plugins/seachart/jrender \
+#    && ant
+
+RUN cd /workspace \
+		&& svn co https://svn.openstreetmap.org/applications/editors/josm/plugins/seachart \
+	  && cd seachart/jrender/ \
+	  && ant
 
 # create links for required jar files
-RUN cd /workspace; \
-    ln -s /workspace/renderer/jsearch/jsearch.jar jsearch.jar; \
-    ln -s /workspace/josm-plugins/seachart/jrender/jrender.jar jrender.jar
+RUN cd /workspace \
+    && ln -s /workspace/renderer/jsearch/jsearch.jar jsearch.jar \
+    && ln -s /workspace/seachart/jrender/jrender.jar jrender.jar
 
 # deploy run script
 COPY run.sh /usr/local/bin
