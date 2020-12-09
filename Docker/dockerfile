@@ -13,7 +13,7 @@ RUN mkdir /workspace \
     && ant
 
 RUN cd /workspace \
-		&& svn co https://svn.openstreetmap.org/applications/editors/josm/plugins/seachart \
+		&& svn co https://josm.openstreetmap.de/osmsvn/applications/editors/josm/plugins/seachart \
 	  && cd seachart/jrender/ \
 	  && ant
 
